@@ -34,7 +34,7 @@ namespace DataAccess.Configs
 
             // User has many Projects - Project has many Users
             builder.HasMany(up => up.UserProjects)
-                .WithOne(up => up.User)
+                .WithOne(u => u.User)
                 .HasForeignKey(up => up.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
         }

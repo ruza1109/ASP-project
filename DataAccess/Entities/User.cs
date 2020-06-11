@@ -17,6 +17,9 @@ namespace DataAccess.Entities
         // User has many Projects
         public virtual ICollection<ProjectUser> UserProjects { get; set; } = new HashSet<ProjectUser>();
 
+        // User has many Tasks
+        public virtual ICollection<Task> Tasks { get; set; }
+
         // TODO User has one created Project
     }
 }
