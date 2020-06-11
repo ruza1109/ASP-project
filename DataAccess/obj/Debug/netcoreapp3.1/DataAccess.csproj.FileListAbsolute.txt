@@ -1,0 +1,12 @@
+C:\Users\Milos\source\repos\Teamwork\DataAccess\bin\Debug\netcoreapp3.1\DataAccess.deps.json
+C:\Users\Milos\source\repos\Teamwork\DataAccess\bin\Debug\netcoreapp3.1\DataAccess.dll
+C:\Users\Milos\source\repos\Teamwork\DataAccess\obj\Debug\netcoreapp3.1\DataAccess.csprojAssemblyReference.cache
+C:\Users\Milos\source\repos\Teamwork\DataAccess\obj\Debug\netcoreapp3.1\DataAccess.AssemblyInfoInputs.cache
+C:\Users\Milos\source\repos\Teamwork\DataAccess\obj\Debug\netcoreapp3.1\DataAccess.AssemblyInfo.cs
+C:\Users\Milos\source\repos\Teamwork\DataAccess\bin\Debug\netcoreapp3.1\DataAccess.runtimeconfig.json
+C:\Users\Milos\source\repos\Teamwork\DataAccess\bin\Debug\netcoreapp3.1\DataAccess.runtimeconfig.dev.json
+C:\Users\Milos\source\repos\Teamwork\DataAccess\obj\Debug\netcoreapp3.1\DataAccess.genruntimeconfig.cache
+C:\Users\Milos\source\repos\Teamwork\DataAccess\bin\Debug\netcoreapp3.1\DataAccess.pdb
+C:\Users\Milos\source\repos\Teamwork\DataAccess\obj\Debug\netcoreapp3.1\DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\Milos\source\repos\Teamwork\DataAccess\obj\Debug\netcoreapp3.1\DataAccess.dll
+C:\Users\Milos\source\repos\Teamwork\DataAccess\obj\Debug\netcoreapp3.1\DataAccess.pdb
