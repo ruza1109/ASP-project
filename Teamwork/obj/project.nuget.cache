@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "c0QgvXpubyd5slk5ssrFOLpnT1QBirtk5PN3rJzlfStM71vPsP11DCn5wMEyiTJnU9ABAUBgKOC8dCWHpYavZQ==",
+  "dgSpecHash": "K1gRUijqp59W6/DND0f6hsPRYNIWV9BQeBhoY/wzirUy7nfHHMui7py4NnGragOYigW6RL3GAIibhbfBzTz1PA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Milos\\source\\repos\\Teamwork\\Teamwork\\Teamwork.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Milos\\.nuget\\packages\\automapper\\9.0.0\\automapper.9.0.0.nupkg.sha512",
     "C:\\Users\\Milos\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\7.0.0\\automapper.extensions.microsoft.dependencyinjection.7.0.0.nupkg.sha512",
+    "C:\\Users\\Milos\\.nuget\\packages\\fluentvalidation\\8.6.2\\fluentvalidation.8.6.2.nupkg.sha512",
     "C:\\Users\\Milos\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\Milos\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.0\\microsoft.bcl.hashcode.1.1.0.nupkg.sha512",
     "C:\\Users\\Milos\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",

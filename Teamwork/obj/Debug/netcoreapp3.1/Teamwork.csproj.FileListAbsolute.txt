@@ -53,5 +53,6 @@ C:\Users\Milos\source\repos\Teamwork\Teamwork\bin\Debug\netcoreapp3.1\DataAccess
 C:\Users\Milos\source\repos\Teamwork\Teamwork\obj\Debug\netcoreapp3.1\Teamwork.csproj.CopyComplete
 C:\Users\Milos\source\repos\Teamwork\Teamwork\bin\Debug\netcoreapp3.1\AutoMapper.dll
 C:\Users\Milos\source\repos\Teamwork\Teamwork\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\Milos\source\repos\Teamwork\Teamwork\bin\Debug\netcoreapp3.1\FluentValidation.dll
 C:\Users\Milos\source\repos\Teamwork\Teamwork\obj\Debug\netcoreapp3.1\Teamwork.csproj.CoreCompileInputs.cache
 C:\Users\Milos\source\repos\Teamwork\Teamwork\obj\Debug\netcoreapp3.1\Teamwork.MvcApplicationPartsAssemblyInfo.cache

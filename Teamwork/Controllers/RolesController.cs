@@ -7,6 +7,8 @@ using DataAccess;
 using DataAccess.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Teamwork.App.Extensions;
+using Teamwork.App.Validations;
 using Teamwork.DTO;
 using Teamwork.DTO.Search;
 
@@ -78,8 +80,15 @@ namespace Teamwork.Controllers
 
         // POST api/<RolesController>
         [HttpPost]
-        public IActionResult Post([FromBody] RoleDTO dto)
+        public IActionResult Post([FromBody] RoleDTO dto, [FromServices] CreateRoleValidation validation)
         {
+            var data = validation.Validate(dto);
+
+            if(!data.IsValid)
+            {
+                return data.AsUnprocessableEntity();
+            }
+
             var role = _mapper.Map<Role>(dto);
 
             try

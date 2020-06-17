@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Teamwork.App.Validations;
 
 namespace Teamwork
 {
@@ -29,6 +30,10 @@ namespace Teamwork
             services.AddControllers();
             services.AddTransient<TeamworkContext>();
             services.AddAutoMapper(this.GetType().Assembly);
+
+            //Validations
+            services.AddTransient<CreateRoleValidation>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
