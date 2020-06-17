@@ -26,9 +26,11 @@ namespace DataAccess.Configs
                 .IsRequired();
 
             builder.Property(t => t.Status)
+                .HasDefaultValue(Status.ToDo)
                 .IsRequired();
 
             builder.Property(t => t.Priority)
+                .HasDefaultValue(Priority.Low)
                 .IsRequired();
 
             // Task has one User

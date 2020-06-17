@@ -8,7 +8,7 @@ namespace DataAccess.Entities
     {
         public string Name { get; set; }
         
-        // Role has many Users
+        //  Role has many Users
         public virtual ICollection<User> Users { get; set; }
 
     }

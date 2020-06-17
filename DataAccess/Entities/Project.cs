@@ -10,8 +10,7 @@ namespace DataAccess.Entities
         public string Description { get; set; }
         public DateTime Deadline { get; set; }
 
-
-        // Project has many workers
+        //  Project has many workers
         public virtual ICollection<ProjectUser> ProjectUsers { get; set; } = new HashSet<ProjectUser>();
 
     }

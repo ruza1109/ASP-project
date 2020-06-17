@@ -4,14 +4,16 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(TeamworkContext))]
-    partial class TeamworkContextModelSnapshot : ModelSnapshot
+    [Migration("20200617092702_TaskLogConfig registered")]
+    partial class TaskLogConfigregistered
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -169,7 +171,7 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("Date")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(null);
+                        .HasDefaultValue(new DateTime(2020, 6, 17, 11, 27, 1, 942, DateTimeKind.Local).AddTicks(9708));
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");

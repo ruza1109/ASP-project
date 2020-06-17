@@ -20,6 +20,7 @@ namespace DataAccess
             modelBuilder.ApplyConfiguration(new RoleConfig());
             modelBuilder.ApplyConfiguration(new ProjectConfig());
             modelBuilder.ApplyConfiguration(new TaskConfig());
+            modelBuilder.ApplyConfiguration(new TaskLogConfig());
 
             modelBuilder.Entity<ProjectUser>()
                 .HasKey(pu => new { pu.ProjectId, pu.UserId});
