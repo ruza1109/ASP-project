@@ -25,12 +25,15 @@ namespace DataAccess.Entities
         public Status Status { get; set; }
         public Priority Priority{ get; set; }
 
-        // Task has one User
+        //  Task has one User
         public int UserId { get; set; }
-        public User User { get; set; }
+        public virtual User User { get; set; }
 
-        // Task has one Project
+        //  Task has one Project
         public int ProjectId { get; set; }
-        public Project Project { get; set; }
+        public virtual Project Project { get; set; }
+
+        //  Task has many TaskLog
+        public virtual ICollection<TaskLog> TaskLogs { get; set; }
     }
 }
