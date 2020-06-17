@@ -97,8 +97,30 @@ namespace Teamwork.Controllers
 
         // PUT api/<RolesController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(int id, [FromBody] RoleDTO dto)
         {
+
+            dto.Id = id;
+            try
+            {
+                var role = _context.Roles.Find(id);
+
+                if(role != null)
+                {
+                    _mapper.Map(dto, role);
+                    _context.SaveChanges();
+
+                    return NoContent();
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
 
         // DELETE api/<RolesController>/5
