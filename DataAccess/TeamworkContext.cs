@@ -9,6 +9,13 @@ namespace DataAccess
 {
     public class TeamworkContext : DbContext
     {
+        public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<Project> Projects { get; set; }
+        public DbSet<Task> Tasks { get; set; }
+        public DbSet<TaskLog> TaskLogs { get; set; }
+
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-BP50IAA\SQLEXPRESS;Initial Catalog=Teamwork;Integrated Security=True");
@@ -26,10 +33,6 @@ namespace DataAccess
                 .HasKey(pu => new { pu.ProjectId, pu.UserId});
         }
 
-        public DbSet<User> Users { get; set; }
-        public DbSet<Role> Roles { get; set; }
-        public DbSet<Project> Projects { get; set; }
-        public DbSet<Task> Tasks { get; set; }
 
 
 
