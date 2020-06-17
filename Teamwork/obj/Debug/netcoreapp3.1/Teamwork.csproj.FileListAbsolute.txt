@@ -10,8 +10,6 @@ C:\Users\Milos\source\repos\Teamwork\Teamwork\bin\Debug\netcoreapp3.1\Teamwork.p
 C:\Users\Milos\source\repos\Teamwork\Teamwork\obj\Debug\netcoreapp3.1\Teamwork.csprojAssemblyReference.cache
 C:\Users\Milos\source\repos\Teamwork\Teamwork\obj\Debug\netcoreapp3.1\Teamwork.AssemblyInfoInputs.cache
 C:\Users\Milos\source\repos\Teamwork\Teamwork\obj\Debug\netcoreapp3.1\Teamwork.AssemblyInfo.cs
-C:\Users\Milos\source\repos\Teamwork\Teamwork\obj\Debug\netcoreapp3.1\Teamwork.csproj.CoreCompileInputs.cache
-C:\Users\Milos\source\repos\Teamwork\Teamwork\obj\Debug\netcoreapp3.1\Teamwork.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Milos\source\repos\Teamwork\Teamwork\obj\Debug\netcoreapp3.1\Teamwork.RazorTargetAssemblyInfo.cache
 C:\Users\Milos\source\repos\Teamwork\Teamwork\obj\Debug\netcoreapp3.1\staticwebassets\Teamwork.StaticWebAssets.Manifest.cache
 C:\Users\Milos\source\repos\Teamwork\Teamwork\obj\Debug\netcoreapp3.1\staticwebassets\Teamwork.StaticWebAssets.xml
@@ -53,3 +51,7 @@ C:\Users\Milos\source\repos\Teamwork\Teamwork\bin\Debug\netcoreapp3.1\runtimes\w
 C:\Users\Milos\source\repos\Teamwork\Teamwork\bin\Debug\netcoreapp3.1\DataAccess.dll
 C:\Users\Milos\source\repos\Teamwork\Teamwork\bin\Debug\netcoreapp3.1\DataAccess.pdb
 C:\Users\Milos\source\repos\Teamwork\Teamwork\obj\Debug\netcoreapp3.1\Teamwork.csproj.CopyComplete
+C:\Users\Milos\source\repos\Teamwork\Teamwork\bin\Debug\netcoreapp3.1\AutoMapper.dll
+C:\Users\Milos\source\repos\Teamwork\Teamwork\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\Milos\source\repos\Teamwork\Teamwork\obj\Debug\netcoreapp3.1\Teamwork.csproj.CoreCompileInputs.cache
+C:\Users\Milos\source\repos\Teamwork\Teamwork\obj\Debug\netcoreapp3.1\Teamwork.MvcApplicationPartsAssemblyInfo.cache

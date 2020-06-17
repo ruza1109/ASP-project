@@ -16,7 +16,7 @@ namespace DataAccess.Configs
 
             builder.Property(r => r.Name)
                 .IsRequired()
-                .HasMaxLength(20);
+                .HasMaxLength(30);
         }
     }
 }

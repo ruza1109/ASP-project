@@ -31,9 +31,38 @@ namespace DataAccess
 
             modelBuilder.Entity<ProjectUser>()
                 .HasKey(pu => new { pu.ProjectId, pu.UserId});
+
+            modelBuilder.Entity<Role>().HasQueryFilter(r => r.DeletedAt == null);
         }
 
+        public override int SaveChanges()
+        {
+            foreach (var item in ChangeTracker.Entries())
+            {
+                if(item.Entity is BaseEntity baseEntity)
+                {
+                    switch (item.State)
+                    {
+                        case EntityState.Added:
+                            baseEntity.CreatedAt = DateTime.Now;
+                            break;
 
+                        case EntityState.Modified:
+                            if(baseEntity.DeletedAt == null)
+                            {
+                                baseEntity.UpdatedAt = DateTime.Now;
+                            }
+                            else
+                            {
+                                baseEntity.UpdatedAt = null;
+                            }
+                            break;
+
+                    }
+                }
+            }
+            return base.SaveChanges();
+        }
 
 
     }
