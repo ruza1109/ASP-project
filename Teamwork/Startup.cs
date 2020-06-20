@@ -7,12 +7,12 @@ using DataAccess;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Teamwork.App.Validations;
-
 namespace Teamwork
 {
     public class Startup
@@ -28,6 +28,8 @@ namespace Teamwork
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddDbContext<TeamworkContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("TeamworkDatabase")));
             services.AddTransient<TeamworkContext>();
             services.AddAutoMapper(this.GetType().Assembly);
 
