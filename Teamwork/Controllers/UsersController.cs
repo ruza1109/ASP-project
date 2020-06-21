@@ -8,6 +8,7 @@ using DataAccess.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using Teamwork.App.Extensions;
 using Teamwork.App.Validations;
 using Teamwork.DTO;
@@ -114,8 +115,43 @@ namespace Teamwork.Controllers
 
         // PUT api/<UsersController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(int id, [FromBody] UserDTO dto,
+            [FromServices] UpdateUserValidation validation)
         {
+            try
+            {
+                dto.Id = id;
+
+                var data = validation.Validate(dto);
+
+                if(!data.IsValid)
+                {
+                    return data.AsUnprocessableEntity();
+                }
+
+                var user = _context.Users.Find(id);
+                
+                if (user == null)
+                {
+                    return NotFound();
+                }
+                
+                _mapper.Map(dto, user);
+
+                user.Role = null;
+
+                _context.SaveChanges();
+
+                return NoContent();
+
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+            
+
+            
         }
 
         // DELETE api/<UsersController>/5

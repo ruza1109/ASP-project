@@ -1,4 +1,5 @@
 ﻿using DataAccess;
+using DataAccess.Entities;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -8,31 +9,24 @@ using Teamwork.DTO;
 
 namespace Teamwork.App.Validations
 {
-    public class CreateUserValidation : AbstractValidator<UserDTO>
+    public class UpdateUserValidation : AbstractValidator<UserDTO>
     {
         private readonly TeamworkContext _context;
 
-        public CreateUserValidation(TeamworkContext context)
+        public UpdateUserValidation(TeamworkContext context)
         {
             _context = context;
 
             RuleFor(u => u.FullName)
-                .NotEmpty()
                 .MinimumLength(4)
                 .MaximumLength(50);
 
             RuleFor(u => u.Username)
-                .NotEmpty()
                 .MinimumLength(4)
                 .MaximumLength(25)
-                .Must(CheckUsernameUniqueness)
+                .Must((dto, username) => !_context.Users.Any(u => u.Username == username && u.Id != dto.Id))
                 .WithMessage(dto => $"{dto.Username} already exists in database. Please, try another username.");
-        }
 
-        // Checking if username already exists in database
-        private bool CheckUsernameUniqueness(string username)
-        {
-            return !_context.Users.Any(r => r.Username == username);
         }
     }
 }

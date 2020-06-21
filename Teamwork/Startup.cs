@@ -44,6 +44,7 @@ namespace Teamwork
             //  Validations
             services.AddTransient<CreateRoleValidation>();
             services.AddTransient<CreateUserValidation>();
+            services.AddTransient<UpdateUserValidation>();
 
         }
 
