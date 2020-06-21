@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using DataAccess;
+using FluentValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -28,17 +29,25 @@ namespace Teamwork
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            //  Database config
             services.AddDbContext<TeamworkContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("TeamworkDatabase")));
+
+            //  DI
             services.AddTransient<TeamworkContext>();
             services.AddAutoMapper(this.GetType().Assembly);
+            
+            //  Custom class for Fluent validator default error messages
+            ValidatorOptions.LanguageManager = new CustomFluentErrorMessages();
 
-            //Validations
+            //  Validations
             services.AddTransient<CreateRoleValidation>();
+            services.AddTransient<CreateUserValidation>();
 
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        //  This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
