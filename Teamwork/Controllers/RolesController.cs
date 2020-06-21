@@ -106,12 +106,20 @@ namespace Teamwork.Controllers
 
         // PUT api/<RolesController>/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] RoleDTO dto)
+        public IActionResult Put(int id, [FromBody] RoleDTO dto, [FromServices] UpdateRoleValidation validation)
         {
 
             dto.Id = id;
+
             try
             {
+                var data = validation.Validate(dto);
+
+                if (!data.IsValid)
+                {
+                    return data.AsUnprocessableEntity();
+                }
+
                 var role = _context.Roles.Find(id);
 
                 if(role != null)

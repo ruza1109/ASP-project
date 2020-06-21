@@ -15,10 +15,9 @@ namespace DataAccess
         public DbSet<Task> Tasks { get; set; }
         public DbSet<TaskLog> TaskLogs { get; set; }
 
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public TeamworkContext(DbContextOptions<TeamworkContext> options) : base(options)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-BP50IAA\SQLEXPRESS;Initial Catalog=Teamwork;Integrated Security=True");
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -33,13 +32,19 @@ namespace DataAccess
                 .HasKey(pu => new { pu.ProjectId, pu.UserId});
 
             modelBuilder.Entity<Role>().HasQueryFilter(r => r.DeletedAt == null);
+            modelBuilder.Entity<User>().HasQueryFilter(r => r.DeletedAt == null);
         }
 
         public override int SaveChanges()
         {
+            return HandleSaveChangesOverride();
+        }
+
+        private int HandleSaveChangesOverride()
+        {
             foreach (var item in ChangeTracker.Entries())
             {
-                if(item.Entity is BaseEntity baseEntity)
+                if (item.Entity is BaseEntity baseEntity)
                 {
                     switch (item.State)
                     {
@@ -48,13 +53,23 @@ namespace DataAccess
                             break;
 
                         case EntityState.Modified:
-                            if(baseEntity.DeletedAt == null)
+                            /// <summary>
+                            ///     If entity is soft deleted
+                            ///     DeletedAt field is populated 
+                            ///     UpdatedAt field keeps date if it already existed, if not - it's set to null
+                            /// </summary>
+                            /// <returns></returns>
+
+                            if (baseEntity.DeletedAt == null)
                             {
                                 baseEntity.UpdatedAt = DateTime.Now;
                             }
                             else
                             {
-                                baseEntity.UpdatedAt = null;
+                                if (baseEntity.UpdatedAt == null)
+                                {
+                                    baseEntity.UpdatedAt = null;
+                                }
                             }
                             break;
 
@@ -63,7 +78,5 @@ namespace DataAccess
             }
             return base.SaveChanges();
         }
-
-
     }
 }

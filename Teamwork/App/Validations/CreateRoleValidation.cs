@@ -18,9 +18,8 @@ namespace Teamwork.App.Validations
 
             RuleFor(dto => dto.Name)
                 .NotEmpty()
-                .WithMessage("Role name is required.")
                 .Must(CheckNameUniqueness)
-                .WithMessage(dto => $"{dto.Name} name is already in database. Please, try another role name.");
+                .WithMessage(dto => $"{dto.Name} already exists in in database. Please, try another role name.");
         }
 
         // Checking if role name already exists in database
