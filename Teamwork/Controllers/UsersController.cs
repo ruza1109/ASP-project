@@ -95,7 +95,7 @@ namespace Teamwork.Controllers
 
             var user = _mapper.Map<User>(dto);
 
-            //  Set Principal Entity to null to prevent creating it
+            //  Set Principal Entity to null in order to prevent creating it
             user.Role = null;
             user.RoleId = dto.Role.Id;
 
@@ -138,6 +138,7 @@ namespace Teamwork.Controllers
                 
                 _mapper.Map(dto, user);
 
+                //  Set Principal Entity to null in order to prevent updating it
                 user.Role = null;
 
                 _context.SaveChanges();
@@ -149,8 +150,6 @@ namespace Teamwork.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
-            
-
             
         }
 

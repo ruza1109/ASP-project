@@ -26,7 +26,7 @@ namespace Teamwork.App.Validations
                 .MinimumLength(4)
                 .MaximumLength(25)
                 .Must(CheckUsernameUniqueness)
-                .WithMessage(dto => $"{dto.Username} already exists in database. Please, try another username.");
+                .WithMessage(dto => $"'{dto.Username}' username already exists in database. Please, try another username.");
         }
 
         // Checking if username already exists in database
