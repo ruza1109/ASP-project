@@ -32,6 +32,7 @@ namespace DataAccess
                 .HasKey(pu => new { pu.ProjectId, pu.UserId});
 
             modelBuilder.Entity<Role>().HasQueryFilter(r => r.DeletedAt == null);
+            modelBuilder.Entity<User>().HasQueryFilter(r => r.DeletedAt == null);
         }
 
         public override int SaveChanges()
