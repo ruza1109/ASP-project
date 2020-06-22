@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
+using Teamwork.App.Errors;
 using Teamwork.App.Extensions;
 using Teamwork.App.Validations;
 using Teamwork.DTO;
@@ -86,6 +87,16 @@ namespace Teamwork.Controllers
         public IActionResult Post([FromBody] UserDTO dto,
             [FromServices] CreateUserValidation validation)
         {
+
+            // Check if role is sent from body
+            if (dto.Role == null)
+            {
+                return UnprocessableEntity(new ClientError { 
+                    Property = "Role",
+                    Message = "Existing role is required."
+                });
+            }
+
             var data = validation.Validate(dto);
 
             if (!data.IsValid)
