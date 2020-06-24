@@ -2,18 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Application.DTO;
+using Application.DTO.Search;
 using AutoMapper;
 using DataAccess;
-using DataAccess.Entities;
+using Domain.Entities;
+using Implementation.Errors;
+using Implementation.Validations;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
-using Teamwork.App.Errors;
-using Teamwork.App.Extensions;
-using Teamwork.App.Validations;
-using Teamwork.DTO;
-using Teamwork.DTO.Search;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -99,10 +98,6 @@ namespace Teamwork.Controllers
 
             var data = validation.Validate(dto);
 
-            if (!data.IsValid)
-            {
-                return data.AsUnprocessableEntity();
-            }
 
             var user = _mapper.Map<User>(dto);
 
@@ -134,11 +129,6 @@ namespace Teamwork.Controllers
                 dto.Id = id;
 
                 var data = validation.Validate(dto);
-
-                if(!data.IsValid)
-                {
-                    return data.AsUnprocessableEntity();
-                }
 
                 var user = _context.Users.Find(id);
                 

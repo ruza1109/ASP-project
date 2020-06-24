@@ -13,7 +13,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Teamwork.App.Validations;
+using Implementation.Validations;
+using Application.Commands;
+using Implementation.Commands.RoleCommand;
+
 namespace Teamwork
 {
     public class Startup
@@ -37,6 +40,7 @@ namespace Teamwork
             //  DI
             services.AddTransient<TeamworkContext>();
             services.AddAutoMapper(this.GetType().Assembly);
+            services.AddTransient<ICreateRoleCommand, EFCreateRoleCommand>();
             
             //  Custom class for Fluent validator default error messages
             ValidatorOptions.LanguageManager = new CustomFluentErrorMessages();
