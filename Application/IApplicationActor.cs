@@ -4,10 +4,10 @@ using System.Text;
 
 namespace Application
 {
-    public interface IUseCase
+    public interface IApplicationActor
     {
         public int Id { get; }
-        public string Name { get; }
-
+        public string Identity { get; }
+        public IEnumerable<int> AllowedCommands { get; }
     }
 }

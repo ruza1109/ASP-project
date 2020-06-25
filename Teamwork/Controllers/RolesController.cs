@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Application;
 using Application.Commands;
+using Application.Commands.Role;
 using Application.DTO;
 using Application.DTO.Search;
 using AutoMapper;
@@ -22,10 +24,15 @@ namespace Teamwork.Controllers
         private readonly TeamworkContext _context;
         private readonly IMapper _mapper;
 
-        public RolesController(TeamworkContext context, IMapper mapper)
+        private readonly IApplicationActor _actor;
+        private readonly CommandExecutor _executor;
+
+        public RolesController(TeamworkContext context, IMapper mapper, IApplicationActor actor, CommandExecutor executor)
         {
             _context = context;
             _mapper = mapper;
+            _actor = actor;
+            _executor = executor;
         }
 
         // GET: api/roles
@@ -81,7 +88,7 @@ namespace Teamwork.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] RoleDTO dto, [FromServices] ICreateRoleCommand command)
         {
-            command.Execute(dto);
+            _executor.ExecuteCommand(command, dto);
 
             return NoContent();
         }

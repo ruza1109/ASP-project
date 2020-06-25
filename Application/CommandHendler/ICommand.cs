@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Application
+namespace Application.CommandHendler
 {
     public interface ICommand<TRequest> : IUseCase
     {

@@ -1,5 +1,5 @@
 ﻿using Application;
-using Application.Commands;
+using Application.Commands.Role;
 using Application.DTO;
 using AutoMapper;
 using DataAccess;
@@ -10,7 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Implementation.Commands.RoleCommand
+namespace Implementation.Commands.RoleCommands
 {
     public class EFCreateRoleCommand : ICreateRoleCommand
     {
@@ -29,18 +29,18 @@ namespace Implementation.Commands.RoleCommand
 
         public string Name => "Create Role";
 
-        public void Execute(RoleDTO request)
+        public void Execute(RoleDTO dto)
         {
-            _validation.ValidateAndThrow(request);
+            _validation.ValidateAndThrow(dto);
 
-            //var role = _mapper.Map<Role>(request);
+            //var role = _mapper.Map<Role>(dto);
 
             var role = new Role
             {
-                Name = request.Name
+                Name = dto.Name
             };
 
-            _context.Add(role);
+            _context.Roles.Add(role);
             _context.SaveChanges();
 
         }

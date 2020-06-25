@@ -15,7 +15,20 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Implementation.Validations;
 using Application.Commands;
-using Implementation.Commands.RoleCommand;
+using Teamwork.App;
+using Application;
+using Application.Commands.Role;
+using Implementation.Commands.RoleCommands;
+using Implementation.Queries.RoleQueries;
+using Application.Commands.User;
+using Implementation.Queries.UserQueries;
+using Implementation.Commands.UserCommands;
+using Application.Commands.Project;
+using Implementation.Queries.ProjectQueries;
+using Implementation.Commands.ProjectCommands;
+using Application.Commands.Task;
+using Implementation.Queries.TaskQuery;
+using Implementation.Commands.TaskCommands;
 
 namespace Teamwork
 {
@@ -33,23 +46,61 @@ namespace Teamwork
         {
             services.AddControllers();
 
-            //  Database config
+            #region DatabaseConfig
+
+            //  ConnectionString
             services.AddDbContext<TeamworkContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("TeamworkDatabase")));
 
-            //  DI
+            #endregion
+
+            #region GlobalDependencies
+
+            //  DbContext
             services.AddTransient<TeamworkContext>();
+
+            //  AutoMapper
             services.AddAutoMapper(this.GetType().Assembly);
-            services.AddTransient<ICreateRoleCommand, EFCreateRoleCommand>();
-            
+
             //  Custom class for Fluent validator default error messages
             ValidatorOptions.LanguageManager = new CustomFluentErrorMessages();
 
-            //  Validations
-            services.AddTransient<CreateRoleValidation>();
-            services.AddTransient<CreateUserValidation>();
-            services.AddTransient<UpdateUserValidation>();
-            services.AddTransient<UpdateRoleValidation>();
+            //  Commands
+            services.AddTransient<CommandExecutor>();
+
+            #endregion
+
+            #region EntityDependencies
+
+            //  Role CRUD Commands and Queries
+            services.AddTransient<IGetRoleQuery, EFGetRoleQuery>();
+            services.AddTransient<IGetOneRoleQuery, EFGetOneRoleQuery>();
+            services.AddTransient<ICreateRoleCommand, EFCreateRoleCommand>();
+            services.AddTransient<IUpdateRoleCommand, EFUpdateRoleCommand>();
+            services.AddTransient<IDeleteRoleCommand, EFDeleteRoleCommand>();
+
+            //  User CRUD Commands and Queries
+            services.AddTransient<IGetUserQuery, EFGetUserQuery>();
+            services.AddTransient<IGetOneUserQuery, EFGetOneUserQuery>();
+            services.AddTransient<ICreateUserCommand, EFCreateUserCommand>();
+            services.AddTransient<IUpdateUserCommand, EFUpdateUserCommand>();
+            services.AddTransient<IDeleteUserCommand, EFDeleteUserCommand>();
+
+            //  Project CRUD Commands and Queries
+            services.AddTransient<IGetProjectQuery, EFGetProjectQuery>();
+            services.AddTransient<IGetOneProjectQuery, EFGetOneProjectQuery>();
+            services.AddTransient<ICreateProjectCommand, EFCreateProjectCommand>();
+            services.AddTransient<IUpdateProjectCommand, EFUpdateProjectCommand>();
+            services.AddTransient<IDeleteProjectCommand, EFDeleteProjectCommand>();
+
+            //  Task CRUD Commands and Queries
+            services.AddTransient<IGetTaskQuery, EFGetTaskQuery>();
+            services.AddTransient<IGetOneTaskQuery, EFGetOneTaskQuery>();
+            services.AddTransient<ICreateTaskCommand, EFCreateTaskCommand>();
+            services.AddTransient<IUpdateTaskCommand, EFUpdateTaskCommand>();
+            services.AddTransient<IDeleteTaskCommand, EFDeleteTaskCommand>();
+
+            #endregion
 
         }
 
@@ -62,6 +113,8 @@ namespace Teamwork
             }
 
             app.UseRouting();
+
+            app.UseMiddleware<AppExceptionHandler>();
 
             app.UseAuthorization();
 

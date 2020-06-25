@@ -1,9 +1,10 @@
-﻿using Application.DTO;
+﻿using Application.CommandHendler;
+using Application.DTO;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Application.Commands
+namespace Application.Commands.Role
 {
     public interface ICreateRoleCommand : ICommand<RoleDTO>
     {
