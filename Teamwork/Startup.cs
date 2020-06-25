@@ -70,7 +70,7 @@ namespace Teamwork
             services.AddTransient<CommandExecutor>();
 
             //  Logger
-            services.AddTransient<IUseCaseLogger, ConsoleLogger>();
+            services.AddTransient<IUseCaseLogger, FileLogger>(); // ConsoleLogger is also an option
 
             //  Application Actor
             services.AddTransient<IApplicationActor, FakeActor>();

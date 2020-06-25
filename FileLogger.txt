@@ -1,0 +1,12 @@
+
+ Date and time: 26-Jun-20 00:01:12 
+ Executor: Fake User 
+ Command: Create Role 
+ Data: {"Id":0,"Name":"Director 6"} 
+
+
+ Date and time: 26-Jun-20 00:01:35 
+ Executor: Fake User 
+ Command: Create Role 
+ Data: {"Id":0,"Name":"Director 6"} 
+
