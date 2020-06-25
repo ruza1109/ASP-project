@@ -11,15 +11,17 @@ namespace Application
     public class CommandExecutor
     {
         private readonly IApplicationActor _actor;
+        private readonly IUseCaseLogger _logger;
 
-        public CommandExecutor(IApplicationActor actor)
+        public CommandExecutor(IApplicationActor actor, IUseCaseLogger logger)
         {
             _actor = actor;
+            _logger = logger;
         }
 
         public void ExecuteCommand<TRequest>(ICommand<TRequest> command, TRequest request)
         {
-            Console.WriteLine($"Date and time: {DateTime.Now} \n Executor: {_actor.Identity} \n Command: {command.Name}");
+            _logger.Log(command, _actor, request);
 
             if(!_actor.AllowedCommands.Contains(command.Id))
             {

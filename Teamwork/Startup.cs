@@ -29,6 +29,7 @@ using Implementation.Commands.ProjectCommands;
 using Application.Commands.Task;
 using Implementation.Queries.TaskQuery;
 using Implementation.Commands.TaskCommands;
+using Implementation.Loggers;
 
 namespace Teamwork
 {
@@ -68,6 +69,11 @@ namespace Teamwork
             //  Commands
             services.AddTransient<CommandExecutor>();
 
+            //  Logger
+            services.AddTransient<IUseCaseLogger, ConsoleLogger>();
+
+            //  Application Actor
+            services.AddTransient<IApplicationActor, FakeActor>();
             #endregion
 
             #region EntityDependencies
@@ -99,6 +105,16 @@ namespace Teamwork
             services.AddTransient<ICreateTaskCommand, EFCreateTaskCommand>();
             services.AddTransient<IUpdateTaskCommand, EFUpdateTaskCommand>();
             services.AddTransient<IDeleteTaskCommand, EFDeleteTaskCommand>();
+
+            #endregion
+
+            #region Validations
+
+            //  Role validations
+            services.AddTransient<CreateRoleValidation>();
+            services.AddTransient<UpdateRoleValidation>();
+            services.AddTransient<CreateUserValidation>();
+            services.AddTransient<UpdateUserValidation>();
 
             #endregion
 
