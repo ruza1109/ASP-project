@@ -76,7 +76,7 @@ namespace Teamwork
             services.AddTransient<IUseCaseLogger, FileLogger>(); // ConsoleLogger is also an option
 
             //  Application Actor
-            services.AddTransient<IApplicationActor, FakeAdminActor>();
+            services.AddTransient<IApplicationActor, FakeActor>();
             #endregion
 
             #region EntityDependencies

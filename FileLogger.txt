@@ -1,61 +1,144 @@
 
+ Date and time: 26-Jun-20 21:09:01 
+ Executor: Fake Admin 
+ Command: Create Role 
+ Data: {"Id":0,"Name":"Director 9"} 
 
- Date and time: 26-Jun-20 19:07:49 
- Executor: Fake User 
+
+ Date and time: 26-Jun-20 21:09:17 
+ Executor: Fake Admin 
+ Command: Get Roles 
+ Data: {"Name":null,"PerPage":10,"Page":1} 
+
+
+ Date and time: 26-Jun-20 21:10:32 
+ Executor: Fake Admin 
+ Command: Create Role 
+ Data: {"Id":0,"Name":"Director 10"} 
+
+
+ Date and time: 26-Jun-20 21:11:05 
+ Executor: Fake Admin 
+ Command: Get Roles 
+ Data: {"Name":null,"PerPage":10,"Page":1} 
+
+
+ Date and time: 26-Jun-20 21:11:15 
+ Executor: Fake Admin 
  Command: Get Roles 
  Data: {"Name":null,"PerPage":5,"Page":1} 
 
 
- Date and time: 26-Jun-20 19:17:26 
- Executor: Fake User 
- Command: Get Roles 
- Data: {"Name":null,"PerPage":10,"Page":1} 
-
-
- Date and time: 26-Jun-20 19:30:11 
- Executor: Fake User 
- Command: Get One Role 
- Data: 3 
-
-
- Date and time: 26-Jun-20 19:31:18 
+ Date and time: 26-Jun-20 21:39:58 
  Executor: Fake Admin 
- Command: Get One Role 
- Data: 3 
+ Command: Update Role 
+ Data: {"Id":1003,"Name":"Updated Director"} 
 
 
- Date and time: 26-Jun-20 19:34:01 
+ Date and time: 26-Jun-20 21:50:58 
  Executor: Fake Admin 
- Command: Get One Role 
- Data: 3 
+ Command: Update Role 
+ Data: {"Id":1003,"Name":"Updated Director"} 
 
 
- Date and time: 26-Jun-20 20:01:13 
+ Date and time: 26-Jun-20 21:53:53 
  Executor: Fake Admin 
- Command: Get One Role 
- Data: 3 
+ Command: Update Role 
+ Data: {"Id":1003,"Name":"Updated Director"} 
 
 
- Date and time: 26-Jun-20 20:09:08 
+ Date and time: 26-Jun-20 21:55:36 
  Executor: Fake Admin 
- Command: Get One Role 
- Data: 3 
+ Command: Update Role 
+ Data: {"Id":1003,"Name":"Updated Director"} 
 
 
- Date and time: 26-Jun-20 20:15:52 
- Executor: Fake Admin 
- Command: Get One Role 
- Data: 3 
-
-
- Date and time: 26-Jun-20 20:45:40 
+ Date and time: 26-Jun-20 21:56:09 
  Executor: Fake Admin 
  Command: Get Roles 
  Data: {"Name":null,"PerPage":10,"Page":1} 
 
 
- Date and time: 26-Jun-20 20:45:52 
+ Date and time: 26-Jun-20 21:57:40 
  Executor: Fake Admin 
  Command: Get Roles 
- Data: {"Name":null,"PerPage":2,"Page":1} 
+ Data: {"Name":null,"PerPage":10,"Page":1} 
+
+
+ Date and time: 26-Jun-20 21:57:55 
+ Executor: Fake Admin 
+ Command: Update Role 
+ Data: {"Id":1003,"Name":"Updated Director"} 
+
+
+ Date and time: 26-Jun-20 22:00:07 
+ Executor: Fake Admin 
+ Command: Get Roles 
+ Data: {"Name":null,"PerPage":20,"Page":1} 
+
+
+ Date and time: 26-Jun-20 22:03:58 
+ Executor: Fake Admin 
+ Command: Update Role 
+ Data: {"Id":1003,"Name":"Updated Director asdasfsaf"} 
+
+
+ Date and time: 26-Jun-20 22:07:20 
+ Executor: Fake Admin 
+ Command: Update Role 
+ Data: {"Id":1003,"Name":"Updated Director asdasfsaf"} 
+
+
+ Date and time: 26-Jun-20 22:07:28 
+ Executor: Fake Admin 
+ Command: Get Roles 
+ Data: {"Name":null,"PerPage":20,"Page":1} 
+
+
+ Date and time: 26-Jun-20 22:07:55 
+ Executor: Fake Admin 
+ Command: Update Role 
+ Data: {"Id":1003,"Name":"Director 1"} 
+
+
+ Date and time: 26-Jun-20 22:17:38 
+ Executor: Fake Admin 
+ Command: Delete Role 
+ Data: 2010 
+
+
+ Date and time: 26-Jun-20 22:17:49 
+ Executor: Fake Admin 
+ Command: Get Roles 
+ Data: {"Name":null,"PerPage":20,"Page":1} 
+
+
+ Date and time: 26-Jun-20 22:18:10 
+ Executor: Fake Admin 
+ Command: Get One Role 
+ Data: 2010 
+
+
+ Date and time: 26-Jun-20 22:21:40 
+ Executor: Fake Admin 
+ Command: Get One Role 
+ Data: 2010 
+
+
+ Date and time: 26-Jun-20 22:22:08 
+ Executor: Fake Admin 
+ Command: Create Role 
+ Data: {"Id":0,"Name":"Director 1"} 
+
+
+ Date and time: 26-Jun-20 22:24:02 
+ Executor: Fake Admin 
+ Command: Get One Role 
+ Data: 2010 
+
+
+ Date and time: 26-Jun-20 22:25:14 
+ Executor: Fake User 
+ Command: Get One Role 
+ Data: 2010 
 

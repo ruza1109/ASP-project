@@ -34,8 +34,11 @@ namespace Implementation.Commands.RoleCommands
         {
             _validation.ValidateAndThrow(request);
 
-            var role = _mapper.Map<Role>(request);
+            var role = _context.Roles.Find(request.Id);
 
+            _mapper.Map(request, role);
+
+            _context.SaveChanges();
 
         }
     }

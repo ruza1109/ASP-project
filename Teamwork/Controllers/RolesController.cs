@@ -61,59 +61,23 @@ namespace Teamwork.Controllers
 
         // PUT api/<RolesController>/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] RoleDTO dto, [FromServices] UpdateRoleValidation validation)
+        public IActionResult Put(int id, [FromBody] RoleDTO dto, [FromServices] IUpdateRoleCommand command)
         {
-
             dto.Id = id;
 
-            try
-            {
-                var data = validation.Validate(dto);
+            _executor.ExecuteCommand(command, dto);
 
-                var role = _context.Roles.Find(id);
+            return NoContent();
 
-                if(role != null)
-                {
-                    _mapper.Map(dto, role);
-                    _context.SaveChanges();
-
-                    return NoContent();
-                }
-                else
-                {
-                    return NotFound();
-                }
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError);
-            }
         }
 
         // DELETE api/<RolesController>/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(int id, [FromServices] IDeleteRoleCommand command)
         {
-            try
-            {
-                var role = _context.Roles.Find(id);
+            _executor.ExecuteCommand(command, id);
 
-                if(role != null)
-                {
-                    role.DeletedAt = DateTime.Now;
-                    _context.SaveChanges();
-
-                    return NoContent();
-                }
-                else
-                {
-                    return NotFound();
-                }
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError);
-            }
+            return NoContent();
         }
     }
 }

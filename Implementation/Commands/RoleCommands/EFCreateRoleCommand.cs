@@ -33,12 +33,7 @@ namespace Implementation.Commands.RoleCommands
         {
             _validation.ValidateAndThrow(dto);
 
-            //var role = _mapper.Map<Role>(dto);
-
-            var role = new Role
-            {
-                Name = dto.Name
-            };
+            var role = _mapper.Map<Role>(dto);
 
             _context.Roles.Add(role);
             _context.SaveChanges();
