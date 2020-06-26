@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Application.CommandHаndler;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Application.Commands.User
 {
-    public interface IDeleteUserCommand
+    public interface IDeleteUserCommand : ICommand<int>
     {
     }
 }

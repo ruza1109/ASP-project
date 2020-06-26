@@ -72,26 +72,11 @@ namespace Teamwork.Controllers
 
         // DELETE api/<UsersController>/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(int id, [FromServices] IDeleteUserCommand command)
         {
-            try
-            {
-                var user = _context.Users.Find(id);
+            _executor.ExecuteCommand(command, id);
 
-                if (user == null)
-                {
-                    return NotFound();
-                }
-
-                user.DeletedAt = DateTime.Now;
-                _context.SaveChanges();
-
-                return NoContent();
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError);
-            }
+            return NoContent();
         }
     }
 }
