@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Application.CommandHendler
+namespace Application.CommandHаndler
 {
     public interface IQuery<TSearch, TResult> : IUseCase
     {

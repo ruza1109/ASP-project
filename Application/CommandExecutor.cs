@@ -1,4 +1,4 @@
-﻿using Application.CommandHendler;
+﻿using Application.CommandHаndler;
 using Application.Exceptions;
 using System;
 using System.Collections.Generic;
@@ -29,6 +29,20 @@ namespace Application
             }
 
             command.Execute(request);
+        }
+
+
+        public TResult ExecuteQuery<TSearch, TResult>
+            (IQuery<TSearch, TResult> query, TSearch search)
+        {
+            _logger.Log(query, _actor, search);
+
+            if (!_actor.AllowedCommands.Contains(query.Id))
+            {
+                throw new UnauthorizedCommandException(query, _actor);
+            }
+
+            return query.Execute(search);
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Application;
-using Application.CommandHendler;
+using Application.CommandHаndler;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
