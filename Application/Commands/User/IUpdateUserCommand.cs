@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Application.CommandHаndler;
+using Application.DTO;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Application.Commands.User
 {
-    public interface IUpdateUserCommand
+    public interface IUpdateUserCommand : ICommand<UserDTO>
     {
     }
 }

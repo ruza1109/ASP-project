@@ -22,17 +22,10 @@ namespace Teamwork.Controllers
     [ApiController]
     public class RolesController : ControllerBase
     {
-        private readonly TeamworkContext _context;
-        private readonly IMapper _mapper;
-
-        private readonly IApplicationActor _actor;
         private readonly CommandExecutor _executor;
 
-        public RolesController(TeamworkContext context, IMapper mapper, IApplicationActor actor, CommandExecutor executor)
+        public RolesController(CommandExecutor executor)
         {
-            _context = context;
-            _mapper = mapper;
-            _actor = actor;
             _executor = executor;
         }
 

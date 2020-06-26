@@ -26,23 +26,23 @@ namespace Implementation.Queries.RoleQueries
 
         public string Name => "Get Roles";
 
-        public PagedResponse<RoleDTO> Execute(SearchRoleDTO search)
+        public PagedResponse<RoleDTO> Execute(SearchRoleDTO dto)
         {
             var rolesQuery = _context.Roles.AsQueryable();
 
-            if (!string.IsNullOrEmpty(search.Name) || !string.IsNullOrWhiteSpace(search.Name))
+            if (!string.IsNullOrEmpty(dto.Name) || !string.IsNullOrWhiteSpace(dto.Name))
             {
-                rolesQuery = rolesQuery.Where(r => r.Name.ToLower().Contains(search.Name.ToLower()));
+                rolesQuery = rolesQuery.Where(r => r.Name.ToLower().Contains(dto.Name.ToLower()));
             }
 
-            var skipCount = search.PerPage * (search.Page - 1);
+            var skipCount = dto.PerPage * (dto.Page - 1);
 
-            var roles = _mapper.Map<List<RoleDTO>>(rolesQuery.Skip(skipCount).Take(search.PerPage).ToList());
+            var roles = _mapper.Map<List<RoleDTO>>(rolesQuery.Skip(skipCount).Take(dto.PerPage).ToList());
 
             var reponse = new PagedResponse<RoleDTO>
             {
-                CurrentPage = search.Page,
-                ItemsPerPage = search.PerPage,
+                CurrentPage = dto.Page,
+                ItemsPerPage = dto.PerPage,
                 TotalCount = rolesQuery.Count(),
                 Items = roles
             };
