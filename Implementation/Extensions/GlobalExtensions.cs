@@ -4,10 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Implementation.Errors;
+using Application.DTO.Pagination;
+using Domain.Entities;
+using System.Runtime.CompilerServices;
 
 namespace Implementation.Extensions
 {
-    public static class ErrorsExtensions
+    public static class GlobalExtensions
     {
         //public static UnprocessableEntityObjectResult AsUnprocessableEntity(this ValidationResult validation)
         //{

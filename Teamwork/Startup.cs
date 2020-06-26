@@ -30,6 +30,8 @@ using Application.Commands.Task;
 using Implementation.Queries.TaskQuery;
 using Implementation.Commands.TaskCommands;
 using Implementation.Loggers;
+using Implementation.Profiles;
+using Domain.Entities;
 
 namespace Teamwork
 {
@@ -61,7 +63,8 @@ namespace Teamwork
             services.AddTransient<TeamworkContext>();
 
             //  AutoMapper
-            services.AddAutoMapper(this.GetType().Assembly);
+            //services.AddAutoMapper(this.GetType().Assembly); Didn't work after changing arhitecture
+            services.AddAutoMapper(typeof(RoleProfile));
 
             //  Custom class for Fluent validator default error messages
             ValidatorOptions.LanguageManager = new CustomFluentErrorMessages();
@@ -73,7 +76,7 @@ namespace Teamwork
             services.AddTransient<IUseCaseLogger, FileLogger>(); // ConsoleLogger is also an option
 
             //  Application Actor
-            services.AddTransient<IApplicationActor, FakeActor>();
+            services.AddTransient<IApplicationActor, FakeAdminActor>();
             #endregion
 
             #region EntityDependencies

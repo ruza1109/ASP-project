@@ -45,27 +45,9 @@ namespace Teamwork.Controllers
 
         // GET api/roles/1
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public IActionResult Get(int id, [FromServices] IGetOneRoleQuery query)
         {
-            try
-            {
-                var role = _context.Roles.Find(id);
-
-                if(role != null)
-                {
-                    return Ok(_mapper.Map<RoleDTO>(role));
-                } 
-                else
-                {
-                    return NotFound();
-                }
-            }
-            catch (Exception)
-            {
-
-                return StatusCode(StatusCodes.Status500InternalServerError);
-            }
-
+            return Ok(_executor.ExecuteQuery(query, id));
         }
 
         // POST api/<RolesController>

@@ -37,17 +37,14 @@ namespace Implementation.Queries.RoleQueries
 
             var skipCount = search.PerPage * (search.Page - 1);
 
+            var roles = _mapper.Map<List<RoleDTO>>(rolesQuery.Skip(skipCount).Take(search.PerPage).ToList());
 
             var reponse = new PagedResponse<RoleDTO>
             {
                 CurrentPage = search.Page,
                 ItemsPerPage = search.PerPage,
                 TotalCount = rolesQuery.Count(),
-                Items = rolesQuery.Skip(skipCount).Take(search.PerPage).Select(x => new RoleDTO
-                {
-                    Id = x.Id,
-                    Name = x.Name
-                }).ToList()
+                Items = roles
             };
 
             return reponse;
