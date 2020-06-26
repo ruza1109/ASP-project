@@ -38,26 +38,9 @@ namespace Teamwork.Controllers
 
         // GET: api/roles
         [HttpGet]
-        public IActionResult Get([FromQuery] SearchRoleDTO dto)
+        public IActionResult Get([FromQuery] SearchRoleDTO search, [FromServices] IGetRoleQuery query)
         {
-            try
-            {
-                var rolesQuery = _context.Roles.AsQueryable();
-
-                if(dto.Name != null)
-                {
-                    rolesQuery = rolesQuery.Where(r => r.Name.ToLower().Contains(dto.Name.ToLower()));
-                }
-
-                var roles = _mapper.Map<List<RoleDTO>>(rolesQuery.ToList());
-
-                return Ok(roles);
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError);
-            }
-
+            return Ok(_executor.ExecuteQuery(query,search));
         }
 
         // GET api/roles/1

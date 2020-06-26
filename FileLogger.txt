@@ -10,3 +10,51 @@
  Command: Create Role 
  Data: {"Id":0,"Name":"Director 6"} 
 
+
+ Date and time: 26-Jun-20 18:20:59 
+ Executor: Fake User 
+ Command: Get Roles 
+ Data: {"Name":null,"PerPage":10,"Page":1} 
+
+
+ Date and time: 26-Jun-20 18:21:44 
+ Executor: Fake User 
+ Command: Get Roles 
+ Data: {"Name":null,"PerPage":10,"Page":1} 
+
+
+ Date and time: 26-Jun-20 18:22:41 
+ Executor: Fake User 
+ Command: Get Roles 
+ Data: {"Name":null,"PerPage":2,"Page":1} 
+
+
+ Date and time: 26-Jun-20 18:22:53 
+ Executor: Fake User 
+ Command: Get Roles 
+ Data: {"Name":null,"PerPage":2,"Page":2} 
+
+
+ Date and time: 26-Jun-20 18:22:58 
+ Executor: Fake User 
+ Command: Get Roles 
+ Data: {"Name":null,"PerPage":2,"Page":3} 
+
+
+ Date and time: 26-Jun-20 18:23:01 
+ Executor: Fake User 
+ Command: Get Roles 
+ Data: {"Name":null,"PerPage":2,"Page":4} 
+
+
+ Date and time: 26-Jun-20 18:23:10 
+ Executor: Fake User 
+ Command: Get Roles 
+ Data: {"Name":null,"PerPage":5,"Page":1} 
+
+
+ Date and time: 26-Jun-20 18:28:57 
+ Executor: Fake User 
+ Command: Get Roles 
+ Data: {"Name":null,"PerPage":5,"Page":1} 
+

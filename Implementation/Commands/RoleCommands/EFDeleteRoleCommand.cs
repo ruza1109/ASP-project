@@ -7,9 +7,9 @@ namespace Implementation.Commands.RoleCommands
 {
     public class EFDeleteRoleCommand : IDeleteRoleCommand
     {
-        public int Id => throw new NotImplementedException();
+        public int Id => 5;
 
-        public string Name => throw new NotImplementedException();
+        public string Name => "Delete Role";
 
         public void Execute(int request)
         {

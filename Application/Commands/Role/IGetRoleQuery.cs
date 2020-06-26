@@ -1,11 +1,14 @@
 ﻿using Application.CommandHаndler;
+using Application.DTO;
+using Application.DTO.Pagination;
+using Application.DTO.Search;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Application.Commands.Role
 {
-    public interface IGetRoleQuery
+    public interface IGetRoleQuery : IQuery<SearchRoleDTO,PagedResponse<RoleDTO>>
     {
     }
 }
