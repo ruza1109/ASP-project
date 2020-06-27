@@ -2,6 +2,7 @@
 using Application.DTO;
 using AutoMapper;
 using DataAccess;
+using Domain.Entities;
 using FluentValidation;
 using Implementation.Validations;
 using System;
@@ -30,6 +31,22 @@ namespace Implementation.Commands.ProjectCommands
         public void Execute(ProjectDTO dto)
         {
             _valdation.ValidateAndThrow(dto);
+
+            var project = _mapper.Map<Project>(dto);
+
+            _context.Projects.Add(project);
+
+
+            foreach (var item in dto.Users)
+            {
+                project.ProjectUsers.Add(new ProjectUser
+                {
+                    ProjectId = project.Id,
+                    UserId = item.Id
+                });
+            }
+
+            _context.SaveChanges();
         }
     }
 }

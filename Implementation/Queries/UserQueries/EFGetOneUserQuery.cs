@@ -28,7 +28,10 @@ namespace Implementation.Queries.UserQueries
 
         public UserDTO Execute(int id)
         {
-            var user = _context.Users.Where(u => u.Id == id).Include(u => u.Role).FirstOrDefault();
+            var user = _context.Users.Where(u => u.Id == id)
+                .Include(u => u.UserProjects)
+                    .ThenInclude(up => up.Project)
+                .Include(u => u.Role).FirstOrDefault();
 
             if (user == null)
             {

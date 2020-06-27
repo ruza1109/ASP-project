@@ -62,9 +62,9 @@ namespace Teamwork
             //  DbContext
             services.AddTransient<TeamworkContext>();
 
-            //  AutoMapper
+            //  AutoMapper Profiles
             //services.AddAutoMapper(this.GetType().Assembly); Didn't work after changing arhitecture
-            services.AddAutoMapper(typeof(RoleProfile), typeof(UserProfile));
+            services.AddAutoMapper(typeof(RoleProfile), typeof(UserProfile), typeof(ProjectProfile));
 
             //  Custom class for Fluent validator default error messages
             ValidatorOptions.LanguageManager = new CustomFluentErrorMessages();

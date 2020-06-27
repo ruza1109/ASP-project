@@ -5,6 +5,7 @@ using Application.DTO.Search;
 using AutoMapper;
 using DataAccess;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +31,8 @@ namespace Implementation.Queries.UserQueries
 
         public PagedResponse<UserDTO> Execute(SearchUserDTO dto)
         {
-            var usersQuery = _context.Users.Include(u => u.Role).AsQueryable();
+            var usersQuery = _context.Users
+                .AsQueryable();
 
             if (!string.IsNullOrEmpty(dto.FullName) || !string.IsNullOrWhiteSpace(dto.FullName))
             {
@@ -42,9 +44,20 @@ namespace Implementation.Queries.UserQueries
                 usersQuery = usersQuery.Where(u => u.Username.ToLower().Contains(dto.Username.ToLower()));
             }
 
+            /**
+             *  Returns Users with searched Role name
+             */
             if (dto.Role != null)
             {
                 usersQuery = usersQuery.Where(u => u.Role.Name.ToLower().Contains(dto.Role.ToLower()));
+            }
+
+            /**
+             *  Returns Users on specific Project name
+             */
+            if (dto.Project != null)
+            {
+                usersQuery = usersQuery.Where(u => u.UserProjects.Select(up => up.Project.Name.ToLower()).Contains(dto.Project.ToLower()));
             }
 
             var skipCount = dto.PerPage * (dto.Page - 1);

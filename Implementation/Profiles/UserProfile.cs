@@ -12,8 +12,17 @@ namespace Implementation.Profiles
     {
         public UserProfile()
         {
-            CreateMap<User, UserDTO>();
             CreateMap<UserDTO, User>();
+
+            CreateMap<User, UserDTO>()
+                .ForMember(dto => dto.Projects,
+                    opt => opt.MapFrom(user => user.UserProjects.Select(up => new ProjectDTO
+                    {
+                        Id = up.Project.Id,
+                        Name = up.Project.Name,
+                        Description = up.Project.Description,
+                        Deadline = up.Project.Deadline
+                    })));
         }
     }
 }

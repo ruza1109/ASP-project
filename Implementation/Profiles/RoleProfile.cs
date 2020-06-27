@@ -8,7 +8,6 @@ using Application.DTO;
 
 namespace Implementation.Profiles
 {
-
     public class RoleProfile : Profile
     {
         public RoleProfile()
