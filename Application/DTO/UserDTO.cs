@@ -13,10 +13,7 @@ namespace Application.DTO
 
         public RoleDTO Role { get; set; }
 
-        public string UserInfo 
-        {
-            get => $"Full name: {FullName}, Username: {Username}"; 
-        }
+        public string UserInfo => $"Full name: {FullName}, Username: {Username}"; 
 
     }
 }

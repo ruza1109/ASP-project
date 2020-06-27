@@ -119,6 +119,7 @@ namespace Teamwork
             services.AddTransient<UpdateRoleValidation>();
             services.AddTransient<CreateUserValidation>();
             services.AddTransient<UpdateUserValidation>();
+            services.AddTransient<CreateProjectValidation>();
 
             #endregion
 

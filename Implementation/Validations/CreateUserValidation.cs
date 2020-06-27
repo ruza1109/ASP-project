@@ -30,7 +30,7 @@ namespace Implementation.Validations
 
             RuleFor(u => u.Role)
                 .Must((dto, role) => _context.Roles.Any(r => r.Id == dto.Role.Id))
-                .WithMessage((dto) => $"Role with id: {dto.Role.Id} doesn't exist. Please, try with right role id.");
+                .WithMessage((dto) => $"Role with id: {dto.Role.Id} doesn't exist. Please, try with an existing role id.");
         }
 
         // Checking if username already exists in database
