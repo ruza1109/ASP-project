@@ -15,9 +15,9 @@ namespace DataAccess
         public DbSet<Task> Tasks { get; set; }
         public DbSet<TaskLog> TaskLogs { get; set; }
 
-        public TeamworkContext(DbContextOptions<TeamworkContext> options) : base(options)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-
+            optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-BP50IAA\SQLEXPRESS;Initial Catalog=Teamwork;Integrated Security=True");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -41,7 +41,7 @@ namespace Implementation.Commands.UserCommands
 
             _mapper.Map(dto, user);
 
-            //  Set Principal Entity to null in order to prevent updating it
+            //  Set Principal Entity to null in order to prevent creating it
             user.Role = null;
 
             _context.SaveChanges();

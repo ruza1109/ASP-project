@@ -52,8 +52,8 @@ namespace Teamwork
             #region DatabaseConfig
 
             //  ConnectionString
-            services.AddDbContext<TeamworkContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("TeamworkDatabase")));
+            //services.AddDbContext<TeamworkContext>(options =>
+            //    options.UseSqlServer(Configuration.GetConnectionString("TeamworkDatabase"))); Didn't work after change arhictecture
 
             #endregion
 
@@ -125,6 +125,9 @@ namespace Teamwork
             //  Project Validations
             services.AddTransient<CreateProjectValidation>();
             services.AddTransient<UpdateProjectValidation>();
+
+            //  Task Validations
+            services.AddTransient<CreateTaskValidation>();
 
             #endregion
 

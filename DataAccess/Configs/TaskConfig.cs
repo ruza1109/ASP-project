@@ -16,22 +16,19 @@ namespace DataAccess.Configs
 
             builder.Property(t => t.Name)
                 .IsRequired()
-                .HasMaxLength(40);
+                .HasMaxLength(80);
 
             builder.Property(t => t.Description)
-                .IsRequired()
                 .HasMaxLength(200);
 
             builder.Property(t => t.StoryPoints)
                 .IsRequired();
 
             builder.Property(t => t.Status)
-                .HasDefaultValue(Status.ToDo)
-                .IsRequired();
+                .HasDefaultValue(Status.ToDo);
 
             builder.Property(t => t.Priority)
-                .HasDefaultValue(Priority.Low)
-                .IsRequired();
+                .HasDefaultValue(Priority.Low);
 
             // Task has one User
             builder.HasOne(u => u.User)

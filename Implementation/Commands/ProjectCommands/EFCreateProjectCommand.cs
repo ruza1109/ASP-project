@@ -36,7 +36,6 @@ namespace Implementation.Commands.ProjectCommands
 
             _context.Projects.Add(project);
 
-
             foreach (var item in dto.Users)
             {
                 project.ProjectUsers.Add(new ProjectUser

@@ -34,8 +34,14 @@ namespace Implementation.Validations
                 .MaximumLength(20);
 
             RuleFor(u => u.Role)
-                .Must(CheckRoleExistance)
-                .WithMessage((dto) => $"Role with id:{dto.Role.Id} doesn't exist. Please, try with an existing role id.");
+                .NotEmpty()
+                .WithMessage("You need to assign role on user.")
+                .DependentRules(() => {
+                    RuleFor(u => u.Role)
+                        .Must(CheckRoleExistence)
+                        .WithMessage((dto) => $"Role with id:{dto.Role.Id} doesn't exist. Please, try with an existing role id.");
+                });
+                
         }
 
         /**
@@ -49,7 +55,7 @@ namespace Implementation.Validations
         /**
          * Check if assigned Role exists in database
          */
-        private bool CheckRoleExistance(UserDTO dto, RoleDTO role)
+        private bool CheckRoleExistence(UserDTO dto, RoleDTO role)
         {
             return _context.Roles.Any(r => r.Id == dto.Role.Id);
         }
