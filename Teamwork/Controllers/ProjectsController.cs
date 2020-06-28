@@ -24,21 +24,18 @@ namespace Teamwork.Controllers
             _executor = executor;
         }
 
-        // GET: api/<ProjectsController>
         [HttpGet]
         public IActionResult Get([FromQuery] SearchProjectDTO dto, [FromServices] IGetProjectQuery query)
         {
             return Ok(_executor.ExecuteQuery(query, dto));
         }
 
-        // GET api/<ProjectsController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id, [FromServices] IGetOneProjectQuery query)
         {
-            return "value";
+            return Ok(_executor.ExecuteQuery(query, id));
         }
 
-        // POST api/<ProjectsController>
         [HttpPost]
         public IActionResult Post([FromBody] ProjectDTO dto, [FromServices] ICreateProjectCommand command)
         {
@@ -47,16 +44,17 @@ namespace Teamwork.Controllers
             return StatusCode(StatusCodes.Status201Created);
         }
 
-        // PUT api/<ProjectsController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/<ProjectsController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id, [FromServices] IDeleteProjectCommand command)
         {
+            _executor.ExecuteCommand(command, id);
+
+            return NoContent();
         }
     }
 }

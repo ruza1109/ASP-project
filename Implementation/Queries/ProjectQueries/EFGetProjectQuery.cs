@@ -42,6 +42,7 @@ namespace Implementation.Queries.ProjectQueries
 
             /**
              * Returns Projects that are assigned to searched User
+             * For example: /api/projects?user=milos+ruzic
              */
 
             if (!string.IsNullOrEmpty(dto.User) || !string.IsNullOrWhiteSpace(dto.User))
