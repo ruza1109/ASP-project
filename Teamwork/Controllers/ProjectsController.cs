@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Application;
 using Application.Commands.Project;
 using Application.DTO;
+using Application.DTO.Search;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,9 +26,9 @@ namespace Teamwork.Controllers
 
         // GET: api/<ProjectsController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get([FromQuery] SearchProjectDTO dto, [FromServices] IGetProjectQuery query)
         {
-            return new string[] { "value1", "value2" };
+            return Ok(_executor.ExecuteQuery(query, dto));
         }
 
         // GET api/<ProjectsController>/5
