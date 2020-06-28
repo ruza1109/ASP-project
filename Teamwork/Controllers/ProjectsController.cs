@@ -45,8 +45,13 @@ namespace Teamwork.Controllers
         }
 
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(int id, [FromBody] ProjectDTO dto, [FromServices] IUpdateProjectCommand command)
         {
+            dto.Id = id;
+
+            _executor.ExecuteCommand(command, dto);
+
+            return NoContent();
         }
 
         [HttpDelete("{id}")]

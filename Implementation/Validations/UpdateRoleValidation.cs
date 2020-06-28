@@ -18,8 +18,16 @@ namespace Implementation.Validations
 
             RuleFor(dto => dto.Name)
                .NotEmpty()
-               .Must((dto, name) => !_context.Roles.Any(r => r.Name == name && r.Id != dto.Id))
+               .Must(CheckRoleUniqueness)
                .WithMessage(dto => $"'{dto.Name}' role name already exists in database. Please, try another role name.");
+        }
+
+        /**
+         * Check if Role name already exists in database
+         */
+        private bool CheckRoleUniqueness(RoleDTO dto, string name)
+        {
+            return !_context.Roles.Any(r => r.Name == name && r.Id != dto.Id);
         }
     }
 }

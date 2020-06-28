@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Application.CommandHаndler;
+using Application.DTO;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Application.Commands.Project
 {
-    public interface IUpdateProjectCommand
+    public interface IUpdateProjectCommand : ICommand<ProjectDTO>
     {
     }
 }

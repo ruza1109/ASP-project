@@ -28,15 +28,30 @@ namespace Implementation.Validations
                 .Must(CheckUsernameUniqueness)
                 .WithMessage(dto => $"'{dto.Username}' username already exists in database. Please, try another username.");
 
+            RuleFor(u => u.Password)
+                .NotEmpty()
+                .MinimumLength(5)
+                .MaximumLength(20);
+
             RuleFor(u => u.Role)
-                .Must((dto, role) => _context.Roles.Any(r => r.Id == dto.Role.Id))
-                .WithMessage((dto) => $"Role with id: {dto.Role.Id} doesn't exist. Please, try with an existing role id.");
+                .Must(CheckRoleExistance)
+                .WithMessage((dto) => $"Role with id:{dto.Role.Id} doesn't exist. Please, try with an existing role id.");
         }
 
-        // Checking if username already exists in database
+        /**
+         * Check if username already exists in database
+         */
         private bool CheckUsernameUniqueness(string username)
         {
             return !_context.Users.Any(r => r.Username == username);
+        }
+
+        /**
+         * Check if assigned Role exists in database
+         */
+        private bool CheckRoleExistance(UserDTO dto, RoleDTO role)
+        {
+            return _context.Roles.Any(r => r.Id == dto.Role.Id);
         }
        
     }

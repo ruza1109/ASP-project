@@ -1,19 +1,18 @@
 ﻿using Application.DTO;
 using DataAccess;
 using FluentValidation;
+using Microsoft.EntityFrameworkCore.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
 namespace Implementation.Validations
 {
-    public class CreateProjectValidation : AbstractValidator<ProjectDTO>
+    public class UpdateProjectValidation : AbstractValidator<ProjectDTO>
     {
         private readonly TeamworkContext _context;
-
-        public CreateProjectValidation(TeamworkContext context)
+        public UpdateProjectValidation(TeamworkContext context)
         {
             _context = context;
 
@@ -33,16 +32,16 @@ namespace Implementation.Validations
                 .DependentRules(() =>
                 {
                     RuleFor(p => p.Deadline)
-                    .GreaterThan(DateTime.Today)
-                    .WithMessage("Deadline date must be in future.")
-                    .LessThan(DateTime.Now.AddYears(5))
-                    .WithMessage("Deadline date can't pass 5 years from today.");
+                        .GreaterThan(DateTime.Today)
+                        .WithMessage("Deadline date must be in future.")
+                        .LessThan(DateTime.Now.AddYears(5))
+                        .WithMessage("Deadline date can't pass 5 years from today.");
                 });
 
             RuleFor(p => p.Users)
                 .NotEmpty()
                 .WithMessage("At least one user must be on project.")
-                .DependentRules(() => 
+                .DependentRules(() =>
                     RuleForEach(u => u.Users)
                         .Must(CheckAssignedUserExistance)
                         .WithMessage("User you are trying to assign on project doesn't exist.")
@@ -54,9 +53,9 @@ namespace Implementation.Validations
         /**
          * Check if Project name already exists in database
          */
-        private bool CheckProjectNameUniqueness(string name)
+        private bool CheckProjectNameUniqueness(ProjectDTO dto, string name)
         {
-            return !_context.Projects.Any(p => p.Name == name);
+            return !_context.Projects.Any(u => u.Name == name && u.Id != dto.Id);
         }
 
         /**
@@ -74,6 +73,5 @@ namespace Implementation.Validations
         {
             return dto.Select(x => x.Id).Distinct().Count() == dto.Count();
         }
-
     }
 }
