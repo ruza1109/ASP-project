@@ -35,6 +35,12 @@ namespace DataAccess.Configs
                 .WithMany(t => t.Tasks)
                 .HasForeignKey(t => t.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            // Task has one Project
+            builder.HasOne(u => u.Project)
+                .WithMany(t => t.Tasks)
+                .HasForeignKey(t => t.ProjectId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

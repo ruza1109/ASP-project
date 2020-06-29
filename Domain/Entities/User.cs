@@ -19,7 +19,5 @@ namespace Domain.Entities
 
         //  User has many Tasks
         public virtual ICollection<Task> Tasks { get; set; }
-
-        //  TODO User has one created Project
     }
 }
