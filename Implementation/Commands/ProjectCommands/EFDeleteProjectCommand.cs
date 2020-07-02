@@ -11,12 +11,10 @@ namespace Implementation.Commands.ProjectCommands
     public class EFDeleteProjectCommand : IDeleteProjectCommand
     {
         private readonly TeamworkContext _context;
-        private readonly IMapper _mapper;
 
-        public EFDeleteProjectCommand(TeamworkContext context, IMapper mapper)
+        public EFDeleteProjectCommand(TeamworkContext context)
         {
             _context = context;
-            _mapper = mapper;
         }
 
         public int Id => 15;

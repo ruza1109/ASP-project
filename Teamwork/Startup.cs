@@ -32,6 +32,14 @@ using Implementation.Commands.TaskCommands;
 using Implementation.Loggers;
 using Implementation.Profiles;
 using Domain.Entities;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Application.Email;
+using Implementation.Email;
+using Implementation.Queries;
 
 namespace Teamwork
 {
@@ -72,12 +80,16 @@ namespace Teamwork
             //  Commands
             services.AddTransient<CommandExecutor>();
 
-            //  Logger
-            services.AddTransient<IUseCaseLogger, ConsoleLogger>(); // FileLogger is also an option
+            // Email
+            services.AddTransient<IEmailSender, SmtpEmail>();
+
+            //  Loggers
+            services.AddTransient<IUseCaseLogger, DatabaseLogger>();
+            //services.AddTransient<IUseCaseLogger, ConsoleLogger>();
             //services.AddTransient<IUseCaseLogger, FileLogger>();
 
             //  Application Actor
-            services.AddTransient<IApplicationActor, FakeAdminActor>();
+            //services.AddTransient<IApplicationActor, FakeAdminActor>();
             #endregion
 
             #region EntityDependencies
@@ -110,6 +122,9 @@ namespace Teamwork
             services.AddTransient<IUpdateTaskCommand, EFUpdateTaskCommand>();
             services.AddTransient<IDeleteTaskCommand, EFDeleteTaskCommand>();
 
+            //  Logger 
+            services.AddTransient<IGetLogsQuery, EFGetLogs>();
+
             #endregion
 
             #region Validations
@@ -128,6 +143,56 @@ namespace Teamwork
 
             //  Task Validations
             services.AddTransient<CreateTaskValidation>();
+            services.AddTransient<UpdateTaskValidation>();
+
+            #endregion
+
+            #region JWT
+
+            services.AddHttpContextAccessor();
+
+            services.AddTransient<IApplicationActor>(x =>
+            {
+                var accessor = x.GetService<IHttpContextAccessor>();
+
+                var user = accessor.HttpContext.User;
+
+                if (user.FindFirst("ActorData") == null)
+                {
+                    throw new InvalidOperationException("Actor data doesn't exist.");
+                }
+
+                var actorString = user.FindFirst("ActorData").Value;
+
+                var actor = JsonConvert.DeserializeObject<JWTActor>(actorString);
+
+                return actor;
+
+            });
+
+            services.AddTransient<JWTToken>();
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(cfg =>
+            {
+                cfg.RequireHttpsMetadata = false;
+                cfg.SaveToken = true;
+                cfg.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidIssuer = "teamwork_api",
+                    ValidateIssuer = true,
+                    ValidAudience = "Any",
+                    ValidateAudience = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("ThisIsMyVerySecretKey")),
+                    ValidateIssuerSigningKey = true,
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.Zero
+                };
+            });
 
             #endregion
 
@@ -141,10 +206,18 @@ namespace Teamwork
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(x =>
+            {
+                x.AllowAnyOrigin();
+                x.AllowAnyMethod();
+                x.AllowAnyHeader();
+            });
+
             app.UseRouting();
 
             app.UseMiddleware<AppExceptionHandler>();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

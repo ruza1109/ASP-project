@@ -11,16 +11,12 @@ using System.Text;
 
 namespace Implementation.Commands.UserCommands
 {
-    public class EFCreateUserCommand : ICreateUserCommand
+    public class EFCreateUserCommand : BaseCommand, ICreateUserCommand
     {
-        private readonly TeamworkContext _context;
-        private readonly IMapper _mapper;
         private readonly CreateUserValidation _validation;
 
-        public EFCreateUserCommand(TeamworkContext context, IMapper mapper, CreateUserValidation validation)
+        public EFCreateUserCommand(TeamworkContext context, IMapper mapper, CreateUserValidation validation) : base(context, mapper)
         {
-            _context = context;
-            _mapper = mapper;
             _validation = validation;
         }
 
@@ -32,15 +28,15 @@ namespace Implementation.Commands.UserCommands
         {
             _validation.ValidateAndThrow(request);
 
-            var user = _mapper.Map<User>(request);
+            var user = Mapper.Map<User>(request);
 
             //  Set Principal Entity to null in order to prevent creating it
             user.Role = null;
             user.RoleId = request.Role.Id;
 
-            _context.Users.Add(user);
+            Context.Users.Add(user);
 
-            _context.SaveChanges();
+            Context.SaveChanges();
         }
     }
 }

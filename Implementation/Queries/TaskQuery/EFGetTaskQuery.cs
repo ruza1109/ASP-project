@@ -37,21 +37,6 @@ namespace Implementation.Queries.TaskQuery
                 taskQuery = taskQuery.Where(t => t.StoryPoints == dto.StoryPoints);
             }
 
-            //if (!string.IsNullOrEmpty(dto.Status) && !string.IsNullOrWhiteSpace(dto.Status))
-            //{
-            //    taskQuery = taskQuery.Where(t => t.Status.convertToString().Contains(dto.Status.ToLower()));
-            //}
-
-            //if (!string.IsNullOrEmpty(dto.Priority) && !string.IsNullOrWhiteSpace(dto.Priority))
-            //{
-            //    taskQuery = taskQuery.Where(t => t.Priority.ToString().ToLower().Contains(dto.Priority.ToLower()));
-            //}
-
-            if (!string.IsNullOrEmpty(dto.User) && !string.IsNullOrWhiteSpace(dto.User))
-            {
-                taskQuery = taskQuery.Where(t => t.User.FullName.ToLower().Contains(dto.User.ToLower()));
-            }
-
             if (!string.IsNullOrEmpty(dto.Project) && !string.IsNullOrWhiteSpace(dto.Project))
             {
                 taskQuery = taskQuery.Where(t => t.Project.Name.ToLower().Contains(dto.Project.ToLower()));

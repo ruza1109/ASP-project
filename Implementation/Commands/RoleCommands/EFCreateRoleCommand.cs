@@ -12,17 +12,13 @@ using System.Text;
 
 namespace Implementation.Commands.RoleCommands
 {
-    public class EFCreateRoleCommand : ICreateRoleCommand
+    public class EFCreateRoleCommand : BaseCommand, ICreateRoleCommand
     {
-        private readonly TeamworkContext _context;
         private readonly CreateRoleValidation _validation;
-        private readonly IMapper _mapper;
 
-        public EFCreateRoleCommand(TeamworkContext context, CreateRoleValidation validation, IMapper mapper)
+        public EFCreateRoleCommand(TeamworkContext context, IMapper mapper, CreateRoleValidation validation) : base(context, mapper)
         {
-            _context = context;
             _validation = validation;
-            _mapper = mapper;
         }
 
         public int Id => 3;
@@ -33,10 +29,10 @@ namespace Implementation.Commands.RoleCommands
         {
             _validation.ValidateAndThrow(dto);
 
-            var role = _mapper.Map<Role>(dto);
+            var role = Mapper.Map<Role>(dto);
 
-            _context.Roles.Add(role);
-            _context.SaveChanges();
+            Context.Roles.Add(role);
+            Context.SaveChanges();
 
         }
     }

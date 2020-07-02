@@ -11,12 +11,10 @@ namespace Implementation.Commands.UserCommands
     public class EFDeleteUserCommand : IDeleteUserCommand
     {
         private readonly TeamworkContext _context;
-        private readonly IMapper _mapper;
 
-        public EFDeleteUserCommand(TeamworkContext context, IMapper mapper)
+        public EFDeleteUserCommand(TeamworkContext context)
         {
             _context = context;
-            _mapper = mapper;
         }
         public int Id => 10;
 

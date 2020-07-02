@@ -34,6 +34,10 @@ namespace Implementation.Validations
                 .MinimumLength(5)
                 .MaximumLength(20);
 
+            RuleFor(u => u.Email)
+                .NotEmpty()
+                .EmailAddress();
+
             RuleFor(u => u.Role)
                 .Must(CheckRoleExistance)
                 .WithMessage((dto) => $"Role with id:{dto.Role.Id} doesn't exist. Please, try with an existing role id.");

@@ -6,8 +6,8 @@ namespace Application
 {
     public interface IApplicationActor
     {
-        public int Id { get; }
-        public string Identity { get; }
-        public IEnumerable<int> AllowedCommands { get; }
+        int Id { get; }
+        string Identity { get; }
+        IEnumerable<int> AllowedCommands { get; }
     }
 }

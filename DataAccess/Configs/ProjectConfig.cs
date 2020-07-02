@@ -28,6 +28,11 @@ namespace DataAccess.Configs
                 .WithOne(pu => pu.Project)
                 .HasForeignKey(pu => pu.ProjectId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(p => p.Leader)
+                .WithMany(u => u.Projects)
+                .HasForeignKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

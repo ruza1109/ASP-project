@@ -39,6 +39,7 @@ namespace Implementation.Commands.TaskCommands
 
             Context.Tasks.Add(task);
             Context.SaveChanges();
+
         }
     }
 }

@@ -14,16 +14,12 @@ using System.Text;
 
 namespace Implementation.Commands.ProjectCommands
 {
-    public class EFUpdateProjectCommand : IUpdateProjectCommand
+    public class EFUpdateProjectCommand : BaseCommand, IUpdateProjectCommand
     {
-        private readonly TeamworkContext _context;
-        private readonly IMapper _mapper;
         private readonly UpdateProjectValidation _validation;
 
-        public EFUpdateProjectCommand(TeamworkContext context, IMapper mapper, UpdateProjectValidation validation)
+        public EFUpdateProjectCommand(TeamworkContext context, IMapper mapper, UpdateProjectValidation validation) : base(context, mapper)
         {
-            _context = context;
-            _mapper = mapper;
             _validation = validation;
         }
 
@@ -35,7 +31,7 @@ namespace Implementation.Commands.ProjectCommands
         {
             _validation.ValidateAndThrow(dto);
 
-            var project = _context.Projects
+            var project = Context.Projects
                 .Include(p => p.ProjectUsers)
                 .FirstOrDefault(p => p.Id == dto.Id);
 
@@ -44,7 +40,7 @@ namespace Implementation.Commands.ProjectCommands
                 throw new EntityNotFoundException(dto.Id);
             }
 
-            _mapper.Map(dto,project);
+            Mapper.Map(dto,project);
 
             project.ProjectUsers.Where(up => up.ProjectId == project.Id)
                 .ToList()
@@ -59,7 +55,7 @@ namespace Implementation.Commands.ProjectCommands
                 });
             }
 
-            _context.SaveChanges();
+            Context.SaveChanges();
         }
     }
 }

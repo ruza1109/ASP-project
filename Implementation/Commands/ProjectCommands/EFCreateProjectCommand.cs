@@ -1,4 +1,5 @@
-﻿using Application.Commands.Project;
+﻿using Application;
+using Application.Commands.Project;
 using Application.DTO;
 using AutoMapper;
 using DataAccess;
@@ -11,16 +12,12 @@ using System.Text;
 
 namespace Implementation.Commands.ProjectCommands
 {
-    public class EFCreateProjectCommand : ICreateProjectCommand
+    public class EFCreateProjectCommand : BaseCommand, ICreateProjectCommand
     {
-        private readonly TeamworkContext _context;
-        private readonly IMapper _mapper;
         private readonly CreateProjectValidation _valdation;
 
-        public EFCreateProjectCommand(TeamworkContext context, IMapper mapper, CreateProjectValidation valdation)
+        public EFCreateProjectCommand(TeamworkContext context, IMapper mapper, CreateProjectValidation valdation) : base(context, mapper)
         {
-            _context = context;
-            _mapper = mapper;
             _valdation = valdation;
         }
 
@@ -32,9 +29,12 @@ namespace Implementation.Commands.ProjectCommands
         {
             _valdation.ValidateAndThrow(dto);
 
-            var project = _mapper.Map<Project>(dto);
+            var project = Mapper.Map<Project>(dto);
 
-            _context.Projects.Add(project);
+            project.Leader = null;
+            project.UserId = dto.Leader.Id;
+
+            Context.Projects.Add(project);
 
             foreach (var item in dto.Users)
             {
@@ -45,7 +45,7 @@ namespace Implementation.Commands.ProjectCommands
                 });
             }
 
-            _context.SaveChanges();
+            Context.SaveChanges();
         }
     }
 }

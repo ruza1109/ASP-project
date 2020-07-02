@@ -9,6 +9,9 @@ namespace Domain.Entities
         public string FullName { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
+        public string Email { get; set; }
+        public string Image { get; set; }
+
 
         //  User has one Role
         public int RoleId { get; set; }
@@ -17,7 +20,14 @@ namespace Domain.Entities
         //  User has many Projects
         public virtual ICollection<ProjectUser> UserProjects { get; set; } = new HashSet<ProjectUser>();
 
+        //  User is leading many Projects 
+        public virtual ICollection<Project> Projects { get; set; }
+
         //  User has many Tasks
         public virtual ICollection<Task> Tasks { get; set; }
+
+        //  User has many UserUseCases
+        public virtual ICollection<UserUseCase> UseCases { get; set; }
+
     }
 }

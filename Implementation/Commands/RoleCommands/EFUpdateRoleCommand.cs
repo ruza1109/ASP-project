@@ -12,17 +12,12 @@ using Implementation.Validations;
 
 namespace Implementation.Commands.RoleCommands
 {
-    public class EFUpdateRoleCommand : IUpdateRoleCommand
+    public class EFUpdateRoleCommand : BaseCommand, IUpdateRoleCommand
     {
-
-        private readonly TeamworkContext _context;
-        private readonly IMapper _mapper;
         private readonly UpdateRoleValidation _validation;
 
-        public EFUpdateRoleCommand(TeamworkContext context, IMapper mapper, UpdateRoleValidation validation)
+        public EFUpdateRoleCommand(TeamworkContext context, IMapper mapper, UpdateRoleValidation validation) : base(context, mapper)
         {
-            _context = context;
-            _mapper = mapper;
             _validation = validation;
         }
 
@@ -34,11 +29,11 @@ namespace Implementation.Commands.RoleCommands
         {
             _validation.ValidateAndThrow(request);
 
-            var role = _context.Roles.Find(request.Id);
+            var role = Context.Roles.Find(request.Id);
 
-            _mapper.Map(request, role);
+            Mapper.Map(request, role);
 
-            _context.SaveChanges();
+            Context.SaveChanges();
 
         }
     }

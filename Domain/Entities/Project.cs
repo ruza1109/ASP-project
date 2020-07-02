@@ -11,10 +11,14 @@ namespace Domain.Entities
         public DateTime Deadline { get; set; }
 
         //  Project has many Users
-        public virtual ICollection<ProjectUser> ProjectUsers { get; set; } = new HashSet<ProjectUser>(); 
-        
+        public virtual ICollection<ProjectUser> ProjectUsers { get; set; } = new HashSet<ProjectUser>();
+
         //  Project has many Tasks
         public virtual ICollection<Task> Tasks { get; set; }
+
+        //  Project has one ProjectOwner
+        public int UserId { get; set; }
+        public virtual User Leader { get; set; }
 
     }
 }

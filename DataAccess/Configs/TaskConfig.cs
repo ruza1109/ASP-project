@@ -11,9 +11,6 @@ namespace DataAccess.Configs
     {
         public void Configure(EntityTypeBuilder<Task> builder)
         {
-            builder.HasIndex(t => t.Name)
-                .IsUnique();
-
             builder.Property(t => t.Name)
                 .IsRequired()
                 .HasMaxLength(80);
@@ -40,7 +37,7 @@ namespace DataAccess.Configs
             builder.HasOne(u => u.Project)
                 .WithMany(t => t.Tasks)
                 .HasForeignKey(t => t.ProjectId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

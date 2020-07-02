@@ -1,4 +1,5 @@
 ﻿using DataAccess.Configs;
+using Domain;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -14,10 +15,13 @@ namespace DataAccess
         public DbSet<Project> Projects { get; set; }
         public DbSet<Task> Tasks { get; set; }
         public DbSet<TaskLog> TaskLogs { get; set; }
+        public DbSet<UserUseCase> UserUseCases{ get; set; }
+        public DbSet<UseCaseLogger> UseCaseLoggers{ get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-BP50IAA\SQLEXPRESS;Initial Catalog=Teamwork;Integrated Security=True");
+            optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-BP50IAA\SQLEXPRESS;Initial Catalog=Teamworkv2;Integrated Security=True");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -34,6 +38,7 @@ namespace DataAccess
             modelBuilder.Entity<Role>().HasQueryFilter(r => r.DeletedAt == null);
             modelBuilder.Entity<User>().HasQueryFilter(r => r.DeletedAt == null);
             modelBuilder.Entity<Project>().HasQueryFilter(r => r.DeletedAt == null);
+            modelBuilder.Entity<Task>().HasQueryFilter(r => r.DeletedAt == null);
         }
 
         public override int SaveChanges()

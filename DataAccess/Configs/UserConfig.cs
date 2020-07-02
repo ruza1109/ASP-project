@@ -26,6 +26,9 @@ namespace DataAccess.Configs
                 .IsRequired()
                 .HasMaxLength(70);
 
+            builder.Property(u => u.Email)
+                .IsRequired();
+
             // User has one Role - Role has many Users 
             builder.HasOne(r => r.Role)
                 .WithMany(u => u.Users)
@@ -37,6 +40,11 @@ namespace DataAccess.Configs
                 .WithOne(u => u.User)
                 .HasForeignKey(up => up.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasMany(t => t.Tasks)
+                .WithOne(u => u.User)
+                .HasForeignKey(t => t.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 

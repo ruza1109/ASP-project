@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Application;
@@ -24,14 +25,10 @@ namespace Teamwork.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly TeamworkContext _context;
         private readonly CommandExecutor _executor;
-        private readonly IMapper _mapper;
 
-        public UsersController(TeamworkContext context, IMapper mapper, CommandExecutor executor)
+        public UsersController(CommandExecutor executor)
         {
-            _context = context;
-            _mapper = mapper;
             _executor = executor;
         }
 

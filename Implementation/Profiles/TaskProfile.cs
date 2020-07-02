@@ -11,7 +11,21 @@ namespace Implementation.Profiles
     {
         public TaskProfile()
         {
-            CreateMap<Task, TaskDTO>();
+            CreateMap<Task, TaskDTO>()
+                .ForMember(dto => dto.Project,
+                    opt => opt.MapFrom(task => new ProjectDTO
+                    {
+                        Name = task.Project.Name,
+                        Description = task.Project.Description,
+                        Deadline = task.Project.Deadline,
+                        Leader = new UserDTO
+                        {
+                            FullName = task.Project.Leader.FullName,
+                            Username = task.Project.Leader.Username,
+                            Email = task.Project.Leader.Email
+                        }
+                    }));
+
             CreateMap<TaskDTO, Task>();
         }
     }

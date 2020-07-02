@@ -33,6 +33,10 @@ namespace Implementation.Validations
                 .MinimumLength(5)
                 .MaximumLength(20);
 
+            RuleFor(u => u.Email)
+                .NotEmpty()
+                .EmailAddress();
+
             RuleFor(u => u.Role)
                 .NotEmpty()
                 .WithMessage("You need to assign role on user.")

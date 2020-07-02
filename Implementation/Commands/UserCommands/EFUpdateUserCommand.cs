@@ -11,16 +11,12 @@ using System.Text;
 
 namespace Implementation.Commands.UserCommands
 {
-    public class EFUpdateUserCommand : IUpdateUserCommand
+    public class EFUpdateUserCommand : BaseCommand, IUpdateUserCommand
     {
-        private readonly TeamworkContext _context;
-        private readonly IMapper _mapper;
         private readonly UpdateUserValidation _validation;
 
-        public EFUpdateUserCommand(TeamworkContext context, IMapper mapper, UpdateUserValidation validation)
+        public EFUpdateUserCommand(TeamworkContext context, IMapper mapper, UpdateUserValidation validation) : base(context, mapper)
         {
-            _context = context;
-            _mapper = mapper;
             _validation = validation;
         }
 
@@ -32,19 +28,19 @@ namespace Implementation.Commands.UserCommands
         {
             _validation.ValidateAndThrow(dto);
 
-            var user = _context.Users.Find(dto.Id);
+            var user = Context.Users.Find(dto.Id);
 
             if (user == null)
             {
                 throw new EntityNotFoundException(dto.Id);
             }
 
-            _mapper.Map(dto, user);
+            Mapper.Map(dto, user);
 
             //  Set Principal Entity to null in order to prevent creating it
             user.Role = null;
 
-            _context.SaveChanges();
+            Context.SaveChanges();
         }
     }
 }

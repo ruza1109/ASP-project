@@ -24,7 +24,6 @@ namespace Teamwork.Controllers
             _executor = executor;
         }
 
-
         // GET: api/<TasksController>
         [HttpGet]
         public IActionResult Get([FromQuery] SearchTaskDTO dto, [FromServices] IGetTaskQuery query)
@@ -34,9 +33,9 @@ namespace Teamwork.Controllers
 
         // GET api/<TasksController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id, [FromServices] IGetOneTaskQuery query)
         {
-            return "value";
+            return Ok(_executor.ExecuteQuery(query, id));
         }
 
         // POST api/<TasksController>
@@ -50,14 +49,22 @@ namespace Teamwork.Controllers
 
         // PUT api/<TasksController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(int id, [FromBody] TaskDTO dto, [FromServices] IUpdateTaskCommand command)
         {
+            dto.Id = id;
+
+            _executor.ExecuteCommand(command, dto);
+
+            return NoContent();
         }
 
         // DELETE api/<TasksController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id, [FromServices] IDeleteTaskCommand command)
         {
+            _executor.ExecuteCommand(command,id);
+
+            return NoContent();
         }
     }
 }
