@@ -40,6 +40,9 @@ using System.Text;
 using Application.Email;
 using Implementation.Email;
 using Implementation.Queries;
+using Application.Commands.TaskLog;
+using Implementation.Commands.TaskLogCommands;
+using Implementation.Queries.TaskLogQueries;
 
 namespace Teamwork
 {
@@ -122,6 +125,13 @@ namespace Teamwork
             services.AddTransient<IUpdateTaskCommand, EFUpdateTaskCommand>();
             services.AddTransient<IDeleteTaskCommand, EFDeleteTaskCommand>();
 
+            //  TaskLog CRUD Commands and Queries
+            services.AddTransient<IGetTaskLogQuery, EFGetTaskLogQuery>();
+            services.AddTransient<IGetOneTaskLogQuery, EFGetOneTaskLogQuery>();
+            services.AddTransient<ICreateTaskLogCommand, EFCreateTaskLogCommand>();
+            services.AddTransient<IUpdateTaskLogCommand, EFUpdateTaskLogCommand>();
+            services.AddTransient<IDeleteTaskLogCommand, EFDeleteTaskLogCommand>();
+
             //  Logger 
             services.AddTransient<IGetLogsQuery, EFGetLogs>();
 
@@ -144,6 +154,10 @@ namespace Teamwork
             //  Task Validations
             services.AddTransient<CreateTaskValidation>();
             services.AddTransient<UpdateTaskValidation>();
+
+            //  TaskLog Validations
+            services.AddTransient<CreateTaskLogValidation>();
+            services.AddTransient<UpdateTaskLogValidation>();
 
             #endregion
 

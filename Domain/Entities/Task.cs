@@ -34,6 +34,6 @@ namespace Domain.Entities
         public virtual Project Project { get; set; }
 
         //  Task has many TaskLog
-        public virtual ICollection<TaskLog> TaskLogs { get; set; }
+        public virtual TaskLog Log { get; set; }
     }
 }

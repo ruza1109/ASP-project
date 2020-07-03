@@ -19,7 +19,7 @@ namespace Implementation.Queries
         {
         }
 
-        public int Id => 21;
+        public int Id => 26;
 
         public string Name => "Get Logs";
 

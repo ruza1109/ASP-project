@@ -16,5 +16,7 @@ namespace Application.DTO
 
         public UserDTO User { get; set; }
         public ProjectDTO Project { get; set; }
+        public TaskLogDTO Log { get; set; }
+
     }
 }

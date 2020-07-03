@@ -17,16 +17,14 @@ namespace DataAccess.Configs
                 .IsRequired();
 
             builder.Property(t => t.Description)
-                .HasMaxLength(200)
-                .IsRequired();
+                .HasMaxLength(200);
 
             builder.Property(t => t.Date)
                 .HasDefaultValue()
                 .IsRequired();
 
             builder.HasOne(t => t.Task)
-                .WithMany(tl => tl.TaskLogs)
-                .HasForeignKey(t => t.TaskId)
+                .WithOne(tl => tl.Log)
                 .OnDelete(DeleteBehavior.Restrict);
 
         }
