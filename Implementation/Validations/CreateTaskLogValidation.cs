@@ -33,7 +33,9 @@ namespace Implementation.Validations
                 {
                     RuleFor(t => t.Task)
                     .Must((dto, task) => _context.Tasks.Any(u => u.Id == dto.Task.Id))
-                    .WithMessage(dto => $"Task with id:{dto.Task.Id} doesn't exist. Please, try another task id.");
+                    .WithMessage(dto => $"Task with id:{dto.Task.Id} doesn't exist. Please, try another task id.")
+                    .Must((dto, task) => !_context.TaskLogs.Any(u => u.TaskId == dto.Task.Id))
+                    .WithMessage(dto => $"Task with an id:{dto.Task.Id} is already logged.");
                 });
 
         }
